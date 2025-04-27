@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoko Drink - Orders</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+
+<body>
+    <div id="header-container"></div>
+    <main class="delivery-container">
+
+        <h2>כתובת למשלוח</h2>
+
+        <div id="spinner-products" class="spinner-products" style="display: none;"></div>
+        <div id="last-address-option" class="category-container"></div> <!-- Place for the option -->
+
+        <form id="delivery-form" style="display: none;">
+            <input type="text" id="address" placeholder="אשדוד, הרצל 37" required>
+            <input type="text" id="entrance" placeholder="כניסה" required>
+            <input type="text" id="floor" placeholder="קומה" required>
+            <input type="text" id="apartment" placeholder="דירה" required>
+            <small id="error-text"></small> <!-- Error message -->
+            <button type="button" id="continue-button">המשך</button>
+        </form>
+
+    </main>
+    <script type="module" src="../scripts/deliveryPage.js"></script>
+
+</body>
+
+</html>

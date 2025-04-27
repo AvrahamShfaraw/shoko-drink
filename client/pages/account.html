@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoko Drink - Account</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+
+    <div id="header-container"></div>
+
+    <main>
+        
+        <h2>פרטי חשבון</h2>
+        
+        <div id="profile-image-container" style="text-align: center; margin-bottom: 20px;">
+            <img id="profile-image" src="../assets/avatar.png" alt="Profile Image"
+                style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+
+        <form id="account-form">
+            <input type="email" id="email" placeholder='כתובת דוא"ל' required>
+            <input type="text" id="displayName" placeholder="שם מלא" required>
+            <input type="tel" id="phoneNumber" placeholder="מספר טלפון" required disabled>
+
+            <small id="error-text"></small> <!-- Error message will appear here -->
+
+            <button type="submit" id="submit-btn">עדכון פרטים</button>
+        </form>
+
+    </main>
+
+
+    <script type="module" src="../scripts/accountPage.js"></script>
+
+</body>
+
+</html>

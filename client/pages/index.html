@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoko Drink - Home</title>
+
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <main>
+
+        <h2>מוצרים פופולריים</h2>
+\
+        <div style=" display: flex; flex-direction: column; max-width: 400px; margin: 0px auto; background: none; padding: 20px;">
+            <input type="text" id="product-search" placeholder="חיפוש מוצרים..." />
+        </div>
+
+        <div id="spinner-categories" class="spinner-categories" style="display: none;">
+
+        </div>
+        <div id="categories" class="category-container">
+
+        </div>
+
+        <div id="spinner-products" class="spinner-products" style="display: none;">
+
+        </div>
+        <div id="products" class="product-container"></div>
+    </main>
+
+    <script type="module" src="../data/seed.js"></script>
+    <script type="module" src="../scripts/indexPage.js"></script>
+
+</body>
+
+</html>

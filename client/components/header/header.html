@@ -1,0 +1,92 @@
+<header>
+    <div class="header">
+
+
+
+
+        <div class="div-2">
+
+            <button id="menu-toggle" class="menu-toggle">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+
+            <div class="cart-container">
+                <button id="cart-link" class="cart-link">
+                    <img src="../assets/cart-icon.png" alt="Cart" class="cart-icon" />
+                    <span id="cart-count" class="cart-badge">0</span>
+                </button>
+            </div>
+
+
+            <div class="user-menu">
+                <img id="user-avatar" class="avatar hidden" alt="User Avatar">
+                <span id="username-span" class="hidden" style="font-size: 20px;"></span>
+                <div id="dropdown-menu" class="dropdown hidden">
+                    <a class="nav-link hidden" id="manage-products-link" href="manage-products.html">ניהול
+                        מוצרים</a>
+                    <a class="nav-link hidden" id="manage-categories-link" href="manage-categories.html">ניהול
+                        קטגוריות</a>
+                    <a class="nav-link" id="history-link" href="order.html">ההזמנות שלי</a>
+
+                    <a href="account.html" class="nav-link">פרופיל</a>
+
+                    <button id="logout-btn" class="nav-link">התנתקות</button>
+                </div>
+            </div>
+
+            <nav>
+
+
+                <div class="nav-links">
+                    <button id="close-menu" class="close-menu">&times;</button> <!-- Close Button -->
+                    <a class="nav-link" id="register-link" href="register.html">יצירת חשבון</a>
+                    <a class="nav-link" id="login-link" href="login.html">כניסה</a>
+                </div>
+
+            </nav>
+        </div>
+
+
+
+        <a href="/client/pages/index.html"
+            style="display: flex; flex-direction:row;justify-content: center; align-items: center; gap: 5px;">
+            <img src="../assets/logo.svg" alt="Logo" class="logo" />
+            <!-- <h1 id="title">Shoko Drink.</h1> -->
+        </a>
+    </div>
+
+    <div id="side-cart" class="side-cart">
+        <div class="side-cart-header">
+            <h2>העגלה שלי</h2>
+            <button id="close-cart" class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+
+        <div class="create-product-header">
+            <button id="checkout">המשך לתשלום</button>
+            <h3><span id="cart-total">0</span>₪</h3>
+        </div>
+
+    </div>
+</header>
+
+
+
+<div id="spinner-app-container" class="spinner-app-container" style="display: block;">
+    <div class="spinner-app-loading-logo">
+        <img src="../assets/logo.svg" alt="Logo" class="spinner-app-logo">
+        <!-- Your loading spinner here -->
+        <div class="spinner-app-loading"></div>
+    </div>
+</div>
+
+<div class="whatsapp-container">
+    <a href="https://wa.me/972508441755" target="_blank" class="whatsapp-btn">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+    </a>
+    <a href="https://wa.me/972515951409" target="_blank" class="whatsapp-btn">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+    </a>
+</div>

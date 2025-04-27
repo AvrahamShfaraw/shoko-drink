@@ -1,0 +1,98 @@
+Online Store System Documentation for a Single Seller
+
+General Description
+The system allows a single seller to add and sell products to customers. 
+Each customer can register, browse products, add items to their cart, and place orders. 
+Once an order is placed, the data is saved, and the customer can view their order history.
+
+Entities in the System and Their Relationships
+
+Users (User)
+📌 The system supports two types of users:
+- Seller (Seller) – There is only one in the system. Can add, edit, and delete products and manage orders.
+- Customers (Customer) – Can add products to their cart and place orders.
+
+📌 User Entity Attributes:
+| Field        | Type     | Description |
+|--------------|----------|-------------|
+| id           | Number   | Unique user identifier |
+| username     | String   | Username |
+| email        | String   | Email address |
+| displayName  | String   | Display name |
+| phoneNumber  | String   | Phone number |
+| password     | String   | Encrypted password |
+| role         | Number   | 0 = Seller, 1 = Customer 
+
+
+Products (Product)
+📌 The seller can add and manage products.
+
+📌 Product Entity Attributes:
+| Field      | Type     | Description |
+|------------|----------|-------------|
+| id         | Number   | Unique product identifier |
+| name       | String   | Product name |
+| price      | Number   | Product price |
+| categoryId | Number   | Product category |
+| image      | String   | Image URL |
+
+Orders (Order)
+📌 Each customer can place multiple orders.
+
+📌 Order Entity Attributes:
+| Field     | Type     | Description |
+|-----------|----------|-------------|
+| id        | Number   | Unique order identifier |
+| userId    | Number   | Customer who placed the order |
+| totalPrice| Number   | This will store the sum of all products in the order |
+| date      | Date     | Order date |
+
+Order Details (OrderProduct)
+📌 links orders to products.
+
+📌 OrderProduct Entity Attributes:
+| Field      | Type    | Description |
+|------------|---------|-------------|
+| orderId    | Number  | Order identifier |
+| productId  | Number  | Product identifier |
+| quantity   | Number  | Quantity of the product in the order |
+
+
+- The entities are stored in the database.
+
+Main System Processes
+
+Registration and Login
+- During registration, if a seller already exists, the option to register as a seller is disabled.
+- Every user must log in to perform actions.
+
+Product Management (Seller Only)
+- The seller can add, edit, and delete products.
+- Products are stored in the system and visible to customers.
+
+Adding Products to Cart (Customer)
+- Customers can add products to their cart before placing an order.
+- ⚠️ The cart is not stored in the databas. temporarily is saved in the LocalStorage.
+
+Placing an Order (Customer)
+- When a customer places an order, the data is saved in the Order and OrderProduct tables.
+- Customers can view order details after purchase.
+
+Viewing Order History (Customer)
+- Customers can see their past orders.
+
+Managing Orders (Seller)
+- The seller can view customer orders.
+
+Data Structure Main Tables/Arrays:
+User (id, username, email, displayName, phoneNumber, password, role)
+Product (id, name, price, categoryId, image)
+Order (id, userId, date)
+OrderProduct (orderId, productId, quantity)
+
+Summary
+- The system is designed for a single seller to sell products.
+- Customers can register, browse products, add to cart, and place orders.
+- The system allows customer management, product management and order management for the seller.
+- The shopping cart is a temporary variable, not stored in the database.
+- The system is simple, efficient, and ideal for a single digital store.

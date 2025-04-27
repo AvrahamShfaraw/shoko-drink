@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoko Drink - Home</title>
+
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <main>
+        
+        <h2>ניהול מוצרים</h2>
+        
+        <div class="create-product-header">
+            <button class="create-product-button" id="create-product-button">
+                הוספת מוצר
+            </button>
+
+            <h3 id="total-products"></h3>
+        </div>
+
+        <div id="spinner-products" class="spinner-products" style="display: none;"></div>
+
+
+        <div class="cart-items" id="manage-products-container"></div>
+        <!-- Create & Edit Product Modal -->
+        <div id="productModal" class="modal" dir="rtl">
+            <div class="modal-content">
+                <span class="close-modal" id="close-modal">&times;</span>
+                <h2 id="modalTitle">הוספת מוצר</h2>
+
+                <form id="productForm">
+
+                    <!-- Image preview (hidden by default) -->
+                    <div style="padding: 10px 0;">
+                        <img id="imagePreview" style="display:none; max-width: 100px; margin: 0 auto;"
+                            alt="Product Image Preview">
+                    </div>
+
+                    <label for="productImageUrl">תמונה:</label>
+                    <input type="text" id="productImageUrl" placeholder="הזן כתובת תמונה...">
+
+                    <label for="productCategory">קטגוריה:</label>
+
+                    <select id="productCategory" required>
+
+                    </select>
+
+
+                    <label for="productName">שם המוצר:</label>
+                    <input type="text" id="productName" required>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center;gap: 10px;">
+                        <div> <label for="productPrice">מחיר:</label>
+                            <input type="number" id="productPrice" min="0" required>
+                        </div>
+                        <div>
+                            <label for="productStock">מלאי:</label>
+                            <input type="number" id="productStock" min="0" required>
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" id="productId">
+                    <button type="submit" id="action-btn" class="action-btn">שמור</button>
+                </form>
+            </div>
+        </div>
+
+
+    </main>
+
+    <script type="module" src="../data/seed.js"></script>
+    <script type="module" src="../scripts/manageProductsPage.js"></script>
+</body>
+
+</html>

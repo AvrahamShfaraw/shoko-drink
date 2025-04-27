@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoko Drink - Orders</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+
+<body>
+    <div id="header-container"></div>
+
+    <main class="payment-container">
+
+        <h2>סיכום ההזמנה</h2>
+
+        <div id="orders-list">
+
+            <div class="order" id="order"></div>
+            <button id="action-btn" class="action-btn">בצע ההזמנה</button>
+
+        </div>
+
+
+
+
+
+    </main>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "EZCFl69T0Svvkvzz8",
+            });
+        })();
+    </script>
+
+    <script type="module" src="../scripts/paymentPage.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+** SQL Editor in Neon Console **
+https://console.neon.tech/app/projects/withered-darkness-05174999/query?branchId=br-delicate-wildflower-a2zrhqn5&database=neondb
+
+** List of relations **
+\dt
+
+** Retrieve All Orders **
+SELECT * FROM public."Orders";
+
+** Drop Tables in Neon Console **
+
+DROP TABLE IF EXISTS "Products" CASCADE;
+DROP TABLE IF EXISTS "Users" CASCADE;
+DROP TABLE IF EXISTS "Categories" CASCADE;
+DROP TABLE IF EXISTS "__EFMigrationsHistory" CASCADE;
+
+
+
+** dotnet Command **
+
+dotnet ef migrations add InitialCreate
+
+
+
+** update display Manage Products **
+
+ // Find all orders related to this product
+
+            // Get Order Products
+            const orderProducts = getOrderProducts(); // Fetch all ordered products
+            
+            const relatedOrders = orderProducts.filter(order => order.productId === product.id);
+
+            // Sum all quantities for this product
+            const totalQuantity = relatedOrders.reduce((sum, order) => sum + order.quantity, 0);
+
+            // Calculate total revenue (quantity × price)
+            const totalRevenue = totalQuantity * product.price;
+
+
+
+** Status Order **
+<div style="display: flex; align-items: center; margin-bottom: 12px; font-weight: bold;">
+                    <img src="/client/assets/clock.svg" alt="Status" style="width: 16px; margin-left: 8px;">
+                    <label>סטטוס: ${orderStatus}</label>
+</div>
+
+ 
+
+** Status	Icon Suggestion	Path Example **
+בהכנה	🧃 Drink / kitchen icon	/client/assets/preparing.svg
+יצא למשלוח	🛵 Delivery scooter/truck	/client/assets/delivery.svg
+נמסר	✅ Checkmark / box icon	/client/assets/delivered.svg
+
+
+Search, sort, and filter option within Top ordered products
+Advanced Order Filter offers many features to make it easy for customers to filter Top ordered products. Sorting and Filter
+options are as follows-
+
+Number of orders (min to max)
+Number of orders (max to min)
+Sort by price (low to high)
+Sort by price (high to low)
+Last 30 days
+Last 60 days
+Learn More
+
+
+based on my shoko drink lets make custume alert using a librly  like react-toastify but for html js css my app as you know for product add to cart and more..  
+
+send email notification for new order both for the admin and for the custumer.
