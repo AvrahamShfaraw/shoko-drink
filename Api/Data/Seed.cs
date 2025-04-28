@@ -16,7 +16,7 @@ namespace Api.Data
             {
                 var usersApp = new List<UserApp>
                 {
-                    new UserApp {  Id  = Guid.NewGuid().ToString() ,Email = "seller1@example.com", DisplayName = "Seller 1", PhoneNumber = "0502222222", Role = 0 }, // Seller
+                    new UserApp {  Id  = Guid.NewGuid().ToString() ,Email = "seller1@example.com", DisplayName = "חיים מולו", PhoneNumber = "0515951409", Role = 0 }, // Seller
                     new UserApp {  Id  = Guid.NewGuid().ToString(),Email = "customer1@example.com", DisplayName = "Customer 1", PhoneNumber = "0503456789", Role =1 }, // Customer
                     new UserApp { Id  = Guid.NewGuid().ToString(),Email = "customer2@example.com", DisplayName = "Customer 2", PhoneNumber = "0504567890", Role =1 }  // Customer
                 };
