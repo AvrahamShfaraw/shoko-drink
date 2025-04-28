@@ -112,7 +112,7 @@ export async function displayOrderDetails() {
         ? `
 <div style="display: flex; align-items: center; justify-content: space-between;" >
      <div style="display: flex; align-items: center; margin-bottom: 12px; font-weight: bold;">
-        <img src=" https://avrahamshfaraw.github.io/shoko-drink/client/assets/clock.svg" alt="Status" style="width: 16px; margin-left: 8px;">
+        <img src="https://avrahamshfaraw.github.io/shoko-drink/client/assets/clock.svg" alt="Status" style="width: 16px; margin-left: 8px;">
         <label>סטטוס: ${orderStatus}</label>
     </div>
 
