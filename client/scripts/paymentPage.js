@@ -25,32 +25,38 @@ document.addEventListener("DOMContentLoaded", async function () {
         return;
     }
 
-    // Display the order products
+    console.log(cart);
     const productsList = document.getElementById("order");
+
     if (cart && cart.length > 0) {
+        // Clear first
+        productsList.innerHTML = `
+        <div id="address-details">
+            <h3>פרטי הכתובת</h3>
+            <span id="address"></span>
+        </div>
+        <div id="products-list">
+            <h3>פרטי המוצרים</h3>
+            <ul id="products-ul"></ul>
+        </div>
+    `;
+
+        const productsUl = document.getElementById("products-ul");
+
         cart.forEach(product => {
-            productsList.innerHTML = `
-                <div id="address-details">
-                    <h3>פרטי הכתובת</h3>
-                    <span id="address"></span>
-                </div>
-                <div id="products-list">
-                    <h3>פרטי המוצרים</h3>
-                    <ul>
-                        <li style="display: flex; align-items: center; margin-bottom: 8px;">
-                            <img src="${product.image}" alt="${product.name}" class="order-product-image">
-                            <div>
-                                <div>
-                                    <strong>${product.name}</strong>
-                                </div>
-                                <div>
-                                    ₪${product.price} × ${product.quantity}
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            `;
+            const li = document.createElement("li");
+            li.style.display = "flex";
+            li.style.alignItems = "center";
+            li.style.marginBottom = "8px";
+
+            li.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" class="order-product-image">
+            <div>
+                <div><strong>${product.name}</strong></div>
+                <div>₪${product.price} × ${product.quantity}</div>
+            </div>
+        `;
+            productsUl.appendChild(li);
         });
 
         pendingOrder.cart = cart;
