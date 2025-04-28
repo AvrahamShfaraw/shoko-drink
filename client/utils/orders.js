@@ -62,7 +62,7 @@ export function displayOrders() {
         <div style="display: flex; align-items: center; justify-content: space-between;" >
 
             <div style="display: flex; align-items: center; margin-bottom: 4px; font-weight: bold;">
-                <img src="/client/assets/calendar.svg" alt="Calendar" style="width: 16px; margin-left: 8px;">
+                <img src="https://avrahamshfaraw.github.io/shoko-drink/client/assets/calendar.svg" alt="Calendar" style="width: 16px; margin-left: 8px;">
                 <label>תאריך: ${orderDate}</label>
             </div>
 
@@ -141,7 +141,7 @@ export async function displayOrderDetails() {
         <div style="display: flex; align-items: center; justify-content: space-between;" >
 
             <div style="display: flex; align-items: center; margin-bottom: 4px; font-weight: bold;">
-                <img src="/client/assets/calendar.svg" alt="Calendar" style="width: 16px; margin-left: 8px;">
+                <img src="https://avrahamshfaraw.github.io/shoko-drink/client/assets/calendar.svg" alt="Calendar" style="width: 16px; margin-left: 8px;">
                 <label>תאריך: ${orderDate}</label>
             </div>
 
@@ -152,12 +152,12 @@ export async function displayOrderDetails() {
         </div>
         
         <div style="display: flex; align-items: center; margin-bottom: 4px; font-weight: bold;">
-            <img src="/client/assets/user.svg" alt="Customer" style="width: 16px; margin-left: 8px;">
+            <img src="https://avrahamshfaraw.github.io/shoko-drink/client/assets/user.svg" alt="Customer" style="width: 16px; margin-left: 8px;">
             <label>לקוח: ${customer.displayName}</label>
         </div>
 
         <div style="display: flex; align-items: center; margin-bottom: 4px; font-weight: bold;">
-    <img src="/client/assets/phone.svg" alt="Customer" style="width: 16px; margin-left: 8px;">
+    <img src="https://avrahamshfaraw.github.io/shoko-drink/client/assets/phone.svg" alt="Customer" style="width: 16px; margin-left: 8px;">
     <a href="https://wa.me/972${customer.phoneNumber}" target="_blank" style="color: inherit; text-decoration: none;">
         טלפון: ${customer.phoneNumber}
     </a>
@@ -165,7 +165,7 @@ export async function displayOrderDetails() {
 
 
       <div style="display: flex; align-items: center; margin-bottom: 4px; font-weight: bold;">
-    <img src="/client/assets/marker.svg" alt="Address" style="width: 16px; margin-left: 8px;">
+    <img src="https://avrahamshfaraw.github.io/shoko-drink/client/assets/marker.svg" alt="Address" style="width: 16px; margin-left: 8px;">
     <a href="https://waze.com/ul?q=${encodeURIComponent(order.address)}" target="_blank" style="color: inherit; text-decoration: none;">
         כתובת: ${order.address}
     </a>
