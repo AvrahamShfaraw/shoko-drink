@@ -2,7 +2,7 @@
     "name": "Shoko Drink",
     "short_name": "Shoko Drink",
     "description": "",
-    "start_url": ".",
+    "start_url": "https://avrahamshfaraw.github.io/shoko-drink/client/pages/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
