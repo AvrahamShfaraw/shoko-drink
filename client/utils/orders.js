@@ -47,21 +47,13 @@ export function displayOrders() {
     userOrders.forEach(order => {
         const orderDate = new Date(order.date).toLocaleDateString("he-IL");
         const orderTotal = order.totalPrice.toFixed(2) || "0.00";
-        const orderStatus = order.status
 
-
-        const statusHtml = `
-        <div style="display: flex; align-items: center; margin-bottom: 12px; font-weight: bold;">
-            <img src="/client/assets/clock.svg" alt="Status" style="width: 16px; margin-left: 8px;">
-            <label>סטטוס: ${orderStatus}</label>
-        </div>
-    `;
 
 
         const orderHTML = `
             <div class="order" >
                 <div style="margin-bottom: 8px;">
-                     <a href="/client/pages/orderDetails.html?orderId=${order.id}" style="color: black; display: flex; justify-content: space-between; align-items: center;">
+                     <a href="https://avrahamshfaraw.github.io/shoko-drink/client/pages/orderDetails.html?orderId=${order.id}" style="color: black; display: flex; justify-content: space-between; align-items: center;">
                         <span class="order-label">הזמנה ${order.id.split('-').pop()}</span>
                         <span class="order-details">פרטי הזמנה &rsaquo;</span>
                     </a>
