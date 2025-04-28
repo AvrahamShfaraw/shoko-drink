@@ -1,5 +1,4 @@
 import { store } from "../stores/store.js";
-import { showPopup } from "../utils/global.js";
 import { loadHeader } from "../utils/navbar.js";
 
 const { orderStore, userStore } = store;  // Destructure the orderStore from the store object
@@ -84,7 +83,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             await sendAdminNotificationEmailTeam(pendingOrder);
 
 
-            window.location.href = `/client/pages/orderDetails.html?orderId=${pendingOrder.orderId}`;
+            window.location.href = `https://avrahamshfaraw.github.io/shoko-drink/client/pages/orderDetails.html?orderId=${pendingOrder.orderId}`;
 
 
         } catch (error) {
