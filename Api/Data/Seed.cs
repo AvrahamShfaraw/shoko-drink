@@ -22,6 +22,16 @@ namespace Api.Data
                 };
 
 
+                var user1Photo = new Photo
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Url = "https://res.cloudinary.com/avraham/image/upload/v1745831967/Screenshot_2025-04-28_121841_hvic3y.png",
+                    IsMain = true
+                };
+
+
+                usersApp[0].Image = user1Photo;
+
                 var categories = new List<Category>
                 {
                     new Category { Name = "וודקה" },
@@ -91,8 +101,8 @@ namespace Api.Data
                         Stock = 2
                     }
                 };
-                
-                
+
+
                 await context.Users.AddRangeAsync(usersApp);
                 await context.Categories.AddRangeAsync(categories);
                 await context.Products.AddRangeAsync(products);
