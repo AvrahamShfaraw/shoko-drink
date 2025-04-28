@@ -19,7 +19,8 @@ DROP TABLE IF EXISTS "__EFMigrationsHistory" CASCADE;
 ** dotnet Command **
 
 dotnet ef migrations add InitialCreate
-
+dotnet build
+dotnet publish -c Release -o ./publish
 
 
 ** update display Manage Products **
