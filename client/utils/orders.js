@@ -89,9 +89,9 @@ export async function displayOrderDetails() {
     const role = user.role;
 ``
 
-    if (!orderId) {
+    if (!orderId && user) {
         document.getElementById("orders-list").innerHTML = "<p>לא נמצאה הזמנה.</p>";
-        return;
+        document.location.href = "https://avrahamshfaraw.github.io/shoko-drink/client/pages/index.html";
     }
 
 
