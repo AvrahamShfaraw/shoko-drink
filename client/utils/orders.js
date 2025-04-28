@@ -87,9 +87,11 @@ export async function displayOrderDetails() {
 
     const user = getLoggedInUser();
 
+    if (!user) {
+        document.location.href = "https://avrahamshfaraw.github.io/shoko-drink/client/pages/index.html";
 
-    if (!orderId && user) {
-        document.getElementById("orders-list").innerHTML = "<p>לא נמצאה הזמנה.</p>";
+    }
+    if (!orderId) {
         document.location.href = "https://avrahamshfaraw.github.io/shoko-drink/client/pages/index.html";
     }
 
