@@ -1081,6 +1081,7 @@ form>label {
         background-color: var(--card-bg-color);
         padding: 20px;
         border-radius: var(--border-radius);
+        transition: right 0.3s ease;
     }
 
 

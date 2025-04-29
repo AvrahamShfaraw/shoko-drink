@@ -151,14 +151,14 @@ export function displayCart() {
 function checkout() {
     let cart = getCart();
     if (cart.length === 0) {
-        alert("Your cart is empty.");
+        showPopup("עגלת קניות ריקה.");
         return;
     }
 
     let userId = getLoggedInUser()?.phoneNumber || null;
     console.log(getLoggedInUser());
     if (!userId) {
-        alert("Please log in to place an order!");
+        showPopup("בצע כניסה כדי לבצע הזמנה!");
         return;
     }
 

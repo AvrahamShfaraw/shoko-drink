@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             pendingOrder.orderId = checkoutResult;
 
             // Send the email confirmation
-            await sendOrderConfirmationEmailCustomer(pendingOrder);
+            // await sendOrderConfirmationEmailCustomer(pendingOrder);
             await sendAdminNotificationEmailTeam(pendingOrder);
 
 
