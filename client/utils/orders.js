@@ -25,11 +25,19 @@ export function displayOrders() {
     const ordersContainer = document.getElementById("orders-list");
     if (!ordersContainer) return;
 
-    let orders = getOrders();
 
     const user = getLoggedInUser();
+
+
+    if (!user) {
+        document.location.href = "https://avrahamshfaraw.github.io/shoko-drink/client/pages/index.html";
+
+    }
+
     const userId = user.phoneNumber;
     const role = user.role;
+    
+    let orders = getOrders();
 
     const userOrders = role === 0 ? orders : orders.filter(order => order.customer.phoneNumber === userId);
 
