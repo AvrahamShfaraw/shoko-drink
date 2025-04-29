@@ -28,7 +28,7 @@ export function getProducts() {
 
 // Display products filtered by category (default: show all)
 export function displayProducts(categoryId = "all", searchTerm = "") {
-    
+
     const productsContainer = document.getElementById("products");
     if (!productsContainer) return;
 
@@ -84,6 +84,15 @@ export function displayProducts(categoryId = "all", searchTerm = "") {
 // Manage Products 
 export function displayManageProducts() {
 
+    const userManager = getLoggedInUser();
+
+
+
+    if (!userManager) {
+        document.location.href = "https://avrahamshfaraw.github.io/shoko-drink/client/pages/index.html";
+
+    }
+
     // handle Open Create Modal
     const createProductButton = document.getElementById("create-product-button");
     if (createProductButton) {
@@ -109,12 +118,12 @@ export function displayManageProducts() {
     const products = getProducts();
 
 
-    const userManager = getLoggedInUser() || null;
 
 
     manageProductsContainer.innerHTML = '';
     if (!userManager || userManager.role !== 0) {
-        return console.log("user not allowed");
+         document.location.href = "https://avrahamshfaraw.github.io/shoko-drink/client/pages/index.html";
+
     }
 
     totalProductsContainer.innerHTML = `<h3>(<strong>${products.length}</strong>)</h3>`;
