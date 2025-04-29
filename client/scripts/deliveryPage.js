@@ -14,36 +14,51 @@ document.addEventListener("DOMContentLoaded", async function () {
     const userOrders = orders.filter(order => order.customer.phoneNumber === userId);
     const lastAddressDiv = document.getElementById("last-address-option");
 
+    function normalizeAddress(address) {
+        return address
+            .replace(/\s+/g, ' ')  // Replace multiple spaces with one space
+            .replace(/,/g, '')     // Remove commas
+            .trim()
+            .toLowerCase();        // Make lowercase
+    }
+    
     if (userOrders.length > 0) {
         userOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-        userOrders.map(latestOrder => {
-
-            // Create button for last address
+    
+        const seen = new Set();
+        const uniqueAddresses = [];
+    
+        userOrders.forEach(order => {
+            const normalized = normalizeAddress(order.address);
+            if (!seen.has(normalized)) {
+                seen.add(normalized);
+                uniqueAddresses.push(order.address); // Keep original address formatting
+            }
+        });
+    
+        uniqueAddresses.forEach(address => {
             const lastAddressButton = document.createElement("button");
-            lastAddressButton.textContent = `${latestOrder.address}`;
+            lastAddressButton.textContent = address;
             lastAddressButton.classList.add("category-button");
             lastAddressButton.style.display = "block";
-
+    
             lastAddressDiv.appendChild(lastAddressButton);
-
-            // Click event
+    
             lastAddressButton.addEventListener("click", () => {
                 let pendingOrder = JSON.parse(localStorage.getItem("pendingOrder"));
                 if (!pendingOrder) {
-                    // If there's no pending order, redirect to cart
                     window.location.href = `cart.html`;
                 }
-                pendingOrder.address = latestOrder.address;
+                pendingOrder.address = address;
                 localStorage.setItem("pendingOrder", JSON.stringify(pendingOrder));
-
+    
                 window.location.href = "payment.html";
             });
+        });
+    
 
-        })
-        
     }
-
+    
 
     const deliveryForm = document.getElementById("delivery-form");
     deliveryForm.style.display = "block";
