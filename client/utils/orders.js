@@ -1,5 +1,5 @@
 import { store } from "../stores/store.js";
-import { getLoggedInUser } from "./global.js";
+import { getLoggedInUser, showPopup } from "./global.js";
 
 
 const orderStore = store.orderStore;; // Get the order store instance
@@ -36,7 +36,7 @@ export function displayOrders() {
 
     const userId = user.phoneNumber;
     const role = user.role;
-    
+
     let orders = getOrders();
 
     const userOrders = role === 0 ? orders : orders.filter(order => order.customer.phoneNumber === userId);
@@ -51,9 +51,17 @@ export function displayOrders() {
         return;
     }
 
+    userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
 
     userOrders.forEach(order => {
-        const orderDate = new Date(order.date).toLocaleDateString("he-IL");
+        const orderDate = new Date(order.date).toLocaleString("he-IL", {
+            weekday: "long",    // יום בשבוע (רביעי)
+            day: "numeric",     // יום (30)
+            month: "long",      // חודש כתוב (אפריל)
+
+        });
+
         const orderTotal = order.totalPrice.toFixed(2) || "0.00";
 
 
@@ -115,8 +123,13 @@ export async function displayOrderDetails() {
     }
 
     const customer = order.customer;
-    const orderDate = new Date(order.date).toLocaleDateString("he-IL");
-    const orderTotal = order.totalPrice.toFixed(2);
+    const orderDate = new Date(order.date).toLocaleString("he-IL", {
+        weekday: "long",    // יום בשבוע (רביעי)
+        day: "numeric",     // יום (30)
+        month: "long",      // חודש כתוב (אפריל)
+
+    });
+     const orderTotal = order.totalPrice.toFixed(2);
     const orderStatus = order.status || "ממתין לאישור";
 
 
@@ -220,7 +233,7 @@ document.addEventListener("change", async (e) => {
             await displayOrderDetails();
 
         } catch (err) {
-            alert("שגיאה בעדכון הסטטוס ❌");
+            showPopup("שגיאה בעדכון הסטטוס ❌");
             console.error(err);
         }
     }
