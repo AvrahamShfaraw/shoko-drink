@@ -35,8 +35,8 @@ function seedData(key, data) {
 // Seed all data
 seedData("users", []);
 
-// seedData("categories", categories);
-// seedData("products", products);
+seedData("categories", categories);
+seedData("products", products);
 
 seedData("orders", []);
 seedData("orderProducts", []);
