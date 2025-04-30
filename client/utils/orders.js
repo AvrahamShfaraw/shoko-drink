@@ -3,7 +3,7 @@ import { getLoggedInUser, showPopup } from "./global.js";
 
 
 const orderStore = store.orderStore;; // Get the order store instance
-const { loadOrders, orderRegistry, getOrderList, loadOrder, updateStatus } = orderStore;
+const { loadOrders, orderRegistry, getOrderList, loadOrder, updateStatus, getOrder } = orderStore;
 
 
 export async function loadOrdersData() {
@@ -122,6 +122,7 @@ export async function displayOrderDetails() {
         return;
     }
 
+    
     const customer = order.customer;
     const orderDate = new Date(order.date).toLocaleString("he-IL", {
         weekday: "long",    // יום בשבוע (רביעי)
@@ -129,7 +130,7 @@ export async function displayOrderDetails() {
         month: "long",      // חודש כתוב (אפריל)
 
     });
-     const orderTotal = order.totalPrice.toFixed(2);
+    const orderTotal = order.totalPrice.toFixed(2);
     const orderStatus = order.status || "ממתין לאישור";
 
 
@@ -222,15 +223,64 @@ export async function displayOrderDetails() {
 }
 
 
+// document.addEventListener("change", async (e) => {
+//     if (e.target.classList.contains("status-dropdown")) {
+//         const id = e.target.dataset.orderId;
+//         const status = e.target.value;
+
+//         try {
+
+//             await updateStatus({ id, status });
+//             await displayOrderDetails();
+
+//         } catch (err) {
+//             showPopup("שגיאה בעדכון הסטטוס ❌");
+//             console.error(err);
+//         }
+//     }
+// });
+
+
 document.addEventListener("change", async (e) => {
     if (e.target.classList.contains("status-dropdown")) {
         const id = e.target.dataset.orderId;
         const status = e.target.value;
 
         try {
-
             await updateStatus({ id, status });
             await displayOrderDetails();
+
+            const order =  getOrder(id); 
+
+            const phone = order.customer.phoneNumber.replace(/^0/, '972'); // מחליף 0 בתחילת המספר
+            const name = order.customer.displayName;
+            const address = order.address;
+
+            const productsList = order.products.map(p => `• ${p.product.name} x${p.quantity}`).join('\n');
+
+            const totalPrice = order.products.reduce((sum, p) => sum + (p.product.price * p.quantity), 0);
+
+            const message = 
+`שלום ${name} 👋
+הזמנתך עודכנה לסטטוס: *${status}*
+
+🧾 מספר הזמנה: ${order.id}
+
+📍 כתובת למשלוח:
+${address}
+
+🛒 פרטי הזמנה:
+${productsList}
+
+💵 סה"כ לתשלום: ${totalPrice} ₪
+
+ זמן אספקה משוער: עד 30 דקות 🛵💨
+
+🛵 שוקו דרינק - משלוח מהיר של אלכוהול, חטיפים, סיגריות ועוד! 🚀`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${phone}?text=${encodedMessage}`;
+            window.open(whatsappURL, "_blank");
 
         } catch (err) {
             showPopup("שגיאה בעדכון הסטטוס ❌");
