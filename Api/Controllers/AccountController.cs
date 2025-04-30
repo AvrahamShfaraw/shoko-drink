@@ -149,14 +149,28 @@ namespace Api.Controllers
         [HttpPost("update")]
         public async Task<ActionResult<UserDto>> Update(RegisterDto updateDto)
         {
-
             var currentUserPhoneNumber = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.MobilePhone);
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == currentUserPhoneNumber && currentUserPhoneNumber != updateDto.PhoneNumber);
+            if (string.IsNullOrEmpty(currentUserPhoneNumber))
+            {
+                return BadRequest("משתמש לא מאומת. אנא התחבר מחדש.");
+            }
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == currentUserPhoneNumber);
 
             if (user == null)
             {
                 return BadRequest("משתמש לא קיים.");
+            }
+
+            // בדיקה אם המשתמש מנסה לעדכן למספר טלפון שכבר קיים אצל משתמש אחר
+            if (updateDto.PhoneNumber != currentUserPhoneNumber)
+            {
+                var phoneNumberExists = await _context.Users.AnyAsync(u => u.PhoneNumber == updateDto.PhoneNumber);
+                if (phoneNumberExists)
+                {
+                    return BadRequest("מספר טלפון זה כבר קיים במערכת.");
+                }
             }
 
             user.Email = updateDto.Email;
@@ -169,7 +183,7 @@ namespace Api.Controllers
 
             if (!success)
             {
-                return BadRequest("משהו לא בסדר בעדכון הפרטים");
+                return BadRequest("משהו השתבש בעת עדכון הפרטים. אנא נסה שוב.");
             }
 
             return CreateUserObject(user);
