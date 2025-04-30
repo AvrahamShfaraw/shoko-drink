@@ -44,8 +44,10 @@ function updateHeader() {
     const manageCetegoriesLink = document.getElementById("manage-categories-link");
 
     const loggedInUser = store.userStore.user;
-    console.log(loggedInUser);
 
+    if (loggedInUser && loggedInUser.role === 0) {
+        document.getElementById("cart-container").classList.add("hidden");
+    }
     document.getElementById("cart-link").addEventListener("click", () => {
         document.getElementById("side-cart").classList.add("show");
         displayCart();
@@ -97,7 +99,7 @@ function updateHeader() {
             manageProductsLink.href = `manage-products.html`;
 
             manageCetegoriesLink.classList.remove("hidden");
-            manageCetegoriesLink.href="manage-categories.html"
+            manageCetegoriesLink.href = "manage-categories.html"
         }
 
         // Handle avatar click to toggle dropdown visibility
