@@ -127,7 +127,7 @@ export class OrderStore {
         } catch (error) {
             console.log(error);
             this.error = "Failed to checkout order";
-            throw new Error("Checkout failed.");
+            throw error;
         } finally {
             this.setLoadingInitial(false);
         }

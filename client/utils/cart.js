@@ -56,7 +56,7 @@ export function addToCart(productId, categoryId) {
 
     // Optionally, you can display a message to the user
     showPopup("המוצר נוסף לעגלה!");
-    
+
     updateCartCount();
     displayProducts(categoryId);
 
@@ -69,16 +69,31 @@ export function removeFromCart(productId) {
     let products = getProducts();
     let product = products.find(p => p.id === productId);
 
-    cart = cart.filter(p => p.productId !== productId);
+    if (!product) {
 
-    // Update the product stock in the products array
-    product.stock += 1;
+        cart = cart.filter(p => p.productId !== productId);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        displayCart();
+        updateCartCount();
+        showPopup("המוצר הוסר מהעגלה!");
+        displayProducts();
+    } else {
+        cart = cart.filter(p => p.productId !== productId);
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    displayCart();
-    updateCartCount();
-    showPopup("המוצר הוסר מהעגלה!");
-    displayProducts();
+        // Update the product stock in the products array
+        product.stock += 1;
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        displayCart();
+        updateCartCount();
+        showPopup("המוצר הוסר מהעגלה!");
+        displayProducts();
+    }
+
+
+
+
+
 
 }
 

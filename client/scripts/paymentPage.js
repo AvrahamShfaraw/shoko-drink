@@ -1,4 +1,5 @@
 import { store } from "../stores/store.js";
+import { showPopup } from "../utils/global.js";
 import { loadHeader } from "../utils/navbar.js";
 
 const { orderStore, userStore } = store;  // Destructure the orderStore from the store object
@@ -71,6 +72,17 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Handle the payment button click
     document.getElementById("action-btn").addEventListener("click", async function () {
+
+        const errorText = document.getElementById('error-text'); // Error message element
+
+        // Clear previous error message
+        errorText.textContent = '';
+        errorText.style.color = '';
+        errorText.style.textAlign = '';
+        errorText.style.padding = '';
+
+
+
         let payButton = document.getElementById('action-btn');
         payButton.disabled = true;
         payButton.innerHTML = '<span class="spinner-button"></span>';
@@ -93,9 +105,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
         } catch (error) {
-            console.error(error);
-            payButton.disabled = false;
-            payButton.innerHTML = 'לשלם';
+            payButton.style.display = 'none';
+            errorText.textContent = error.response.data; // Error message from the server
+            errorText.style.color = 'red';
+            errorText.style.textAlign = 'center';
+            errorText.style.padding = '10px';
+            errorText.style.direction = 'rtl'; // Set direction to right-to-left
+
         }
     });
 });

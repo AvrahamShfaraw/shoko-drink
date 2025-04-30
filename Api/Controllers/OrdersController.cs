@@ -32,7 +32,7 @@ namespace Api.Controllers
 
 
         [HttpPost("checkout")]
-        public async Task<IActionResult> Checkout([FromBody] OrderDto dto)
+        public async Task<ActionResult> Checkout([FromBody] OrderDto dto)
         {
             var currentUserPhoneNumber = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.MobilePhone);
 
