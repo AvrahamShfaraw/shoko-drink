@@ -3,7 +3,8 @@ import { store } from "../stores/store.js";
 
 
 // https://shoko-drink-babcg9dmabfrdphw.israelcentral-01.azurewebsites.net/api/
-axios.defaults.baseURL = 'http://localhost:5000/api/';
+// http://localhost:5000/api/
+axios.defaults.baseURL = 'https://shoko-drink-babcg9dmabfrdphw.israelcentral-01.azurewebsites.net/api/';
 
 export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

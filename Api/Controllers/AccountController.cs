@@ -152,7 +152,7 @@ namespace Api.Controllers
 
             var currentUserPhoneNumber = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.MobilePhone);
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == currentUserPhoneNumber);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == currentUserPhoneNumber && currentUserPhoneNumber != updateDto.PhoneNumber);
 
             if (user == null)
             {

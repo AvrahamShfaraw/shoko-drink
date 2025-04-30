@@ -170,8 +170,3 @@ C:\Users\97250\OneDrive\שולחן העבודה\shoko-drink\api\obj\Debug\net8.0
 C:\Users\97250\OneDrive\שולחן העבודה\shoko-drink\api\obj\Debug\net8.0\Api.genruntimeconfig.cache
 C:\Users\97250\OneDrive\שולחן העבודה\shoko-drink\api\obj\Debug\net8.0\ref\Api.dll
 C:\Users\97250\OneDrive\שולחן העבודה\shoko-drink\api\obj\Debug\net8.0\Api.sourcelink.json
-C:\Users\97250\OneDrive\שולחן העבודה\shoko-drink\api\bin\Debug\net8.0\publish\web.config
-C:\Users\97250\OneDrive\שולחן העבודה\shoko-drink\api\bin\Debug\net8.0\publish\Api.deps.json
-C:\Users\97250\OneDrive\שולחן העבודה\shoko-drink\api\bin\Debug\net8.0\publish\Api.runtimeconfig.json
-C:\Users\97250\OneDrive\שולחן העבודה\shoko-drink\api\bin\Debug\net8.0\publish\appsettings.Development.json
-C:\Users\97250\OneDrive\שולחן העבודה\shoko-drink\api\bin\Debug\net8.0\publish\appsettings.json
