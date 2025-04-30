@@ -3,7 +3,7 @@ import { getLoggedInUser, showPopup } from "./global.js";
 
 
 const orderStore = store.orderStore;; // Get the order store instance
-const { loadOrders, orderRegistry, getOrderList, loadOrder, updateStatus, getOrder } = orderStore;
+const { loadOrders, orderRegistry, getOrderList, loadOrder, updateStatus, getOrder, deleteOrder } = orderStore;
 
 
 export async function loadOrdersData() {
@@ -25,26 +25,19 @@ export function displayOrders() {
     const ordersContainer = document.getElementById("orders-list");
     if (!ordersContainer) return;
 
-
     const user = getLoggedInUser();
-
-
     if (!user) {
         document.location.href = "https://avrahamshfaraw.github.io/shoko-drink/client/pages/index.html";
-
     }
 
     const userId = user.phoneNumber;
     const role = user.role;
 
     let orders = getOrders();
-
     const userOrders = role === 0 ? orders : orders.filter(order => order.customer.phoneNumber === userId);
-
 
     ordersContainer.innerHTML = "";
     ordersContainer.dir = "rtl";
-
 
     if (userOrders.length === 0) {
         ordersContainer.innerHTML = `<p>אין הזמנות עדיין.</p>`;
@@ -53,47 +46,68 @@ export function displayOrders() {
 
     userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-
     userOrders.forEach(order => {
         const orderDate = new Date(order.date).toLocaleString("he-IL", {
             weekday: "long",    // יום בשבוע (רביעי)
             day: "numeric",     // יום (30)
             month: "long",      // חודש כתוב (אפריל)
-
         });
 
         const orderTotal = order.totalPrice.toFixed(2) || "0.00";
 
-
-
         const orderHTML = `
-            <div class="order" >
+            <div class="order">
+                ${
+                    role === 0 ? `<button class="delete-order-btn" data-id="${order.id}">
+                <span id="action-icon">&times;</span>
+                <span class="spinner-delete-button" style="display: none; "></span>
+                </button>`:''
+                }
+                
                 <div style="margin-bottom: 8px;">
-                     <a href="https://avrahamshfaraw.github.io/shoko-drink/client/pages/orderDetails.html?orderId=${order.id}" style="color: black; display: flex; justify-content: space-between; align-items: center;">
+                    <a href="https://avrahamshfaraw.github.io/shoko-drink/client/pages/orderDetails.html?orderId=${order.id}" style="color: black; display: flex; justify-content: space-between; align-items: center;">
                         <span class="order-label">הזמנה ${order.id.split('-').pop()}</span>
                         <span class="order-details">פרטי הזמנה &rsaquo;</span>
                     </a>
                 </div>
-                
-        <div style="display: flex; align-items: center; justify-content: space-between;" >
 
-            <div style="display: flex; align-items: center; margin-bottom: 4px; font-weight: bold;">
-                <img src="https://avrahamshfaraw.github.io/shoko-drink/client/assets/calendar.svg" alt="Calendar" style="width: 16px; margin-left: 8px;">
-                <label>תאריך: ${orderDate}</label>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; margin-bottom: 4px; font-weight: bold;">
+                        <img src="https://avrahamshfaraw.github.io/shoko-drink/client/assets/calendar.svg" alt="Calendar" style="width: 16px; margin-left: 8px;">
+                        <label>תאריך: ${orderDate}</label>
+                    </div>
+        
+                    <div style="display: flex; align-items: center; margin-bottom: 4px; font-weight: bold;">
+                        <label style="color: var(--primary-color);">₪${orderTotal}</label>
+                    </div>
+                </div>
             </div>
-
-            <div style="display: flex; align-items: center; margin-bottom: 4px; font-weight: bold;">
-                <label style="color: var(--primary-color);">₪${orderTotal}</label>
-            </div>
-
-            
-        </div>
-    </div>
         `;
 
-        ordersContainer.innerHTML += orderHTML;
+        // Append the order HTML to the container
+        ordersContainer.insertAdjacentHTML('beforeend', orderHTML);
+
+        // Select the newly added delete button
+        const deleteButton = ordersContainer.querySelector(`.delete-order-btn[data-id="${order.id}"]`);
+        deleteButton.addEventListener('click', async () => {
+
+            const actionIcon = document.getElementById("action-icon")
+            actionIcon.style.display = 'none';
+            const spinner = deleteButton.querySelector(".spinner-delete-button");
+            spinner.style.display = "inline-block";
+
+            try {
+                await deleteOrder(order.id);
+                showPopup("ההזמנה נמחקה בהצלחה!");
+                // Optionally, remove the order element from the DOM after successful deletion
+                displayOrders();
+            } catch (error) {
+                showPopup(error);
+            }
+        });
     });
 }
+
 
 
 // Display order details

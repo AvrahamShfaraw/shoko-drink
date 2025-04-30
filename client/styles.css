@@ -1032,7 +1032,21 @@ form>label {
     border: none;
 }
 
+.delete-order-btn {
+    font-size: 16px; /* small text */
+    padding: 2px 6px; /* tiny padding */
+    background-color: transparent; /* or inherit global button background */
+    color: red; /* optional: make it red to show it's delete */
+    border: none; /* no border, clean look */
+    cursor: pointer;
+    margin-top: 8px; /* some spacing if needed */
+    align-self: flex-end; /* if inside flexbox, can align to end */
+}
+.delete-order-btn:hover{
+    background: none;
+    border: none; /* no border, clean look */
 
+}
 
 @keyframes spin {
     0% {

@@ -114,6 +114,18 @@ namespace Api.Controllers
             return Ok(order);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(Guid id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+
+            if (order == null) return NotFound();
+
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
         [HttpPut("status")]
         public async Task<IActionResult> UpdateStatus([FromBody] OrderDto dto)
         {

@@ -4,7 +4,7 @@ import { store } from "../stores/store.js";
 
 // https://shoko-drink-babcg9dmabfrdphw.israelcentral-01.azurewebsites.net/api/
 // http://localhost:5000/api/
-axios.defaults.baseURL = 'https://shoko-drink-babcg9dmabfrdphw.israelcentral-01.azurewebsites.net/api/';
+axios.defaults.baseURL = 'http://localhost:5000/api/';
 
 export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -118,7 +118,9 @@ const Orders = {
     checkout: (pendingOrder) => requests.post('/orders/checkout', pendingOrder),
     list: () => requests.get('/orders'),
     details: (id) => requests.get(`/orders/${id}`),
-    updateStatus: (order) => requests.put('/orders/status', order)
+    updateStatus: (order) => requests.put('/orders/status', order),
+    delete: (id) => requests.delete(`/orders/${id}`)
+
 };
 
 
