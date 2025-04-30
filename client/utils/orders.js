@@ -122,7 +122,7 @@ export async function displayOrderDetails() {
         return;
     }
 
-    
+
     const customer = order.customer;
     const orderDate = new Date(order.date).toLocaleString("he-IL", {
         weekday: "long",    // יום בשבוע (רביעי)
@@ -250,7 +250,7 @@ document.addEventListener("change", async (e) => {
             await updateStatus({ id, status });
             await displayOrderDetails();
 
-            const order =  getOrder(id); 
+            const order = getOrder(id);
 
             const phone = order.customer.phoneNumber.replace(/^0/, '972'); // מחליף 0 בתחילת המספר
             const name = order.customer.displayName;
@@ -260,23 +260,70 @@ document.addEventListener("change", async (e) => {
 
             const totalPrice = order.products.reduce((sum, p) => sum + (p.product.price * p.quantity), 0);
 
-            const message = 
-`שלום ${name} 👋
-הזמנתך עודכנה לסטטוס: *${status}*
+            let message;
 
-🧾 מספר הזמנה: ${order.id}
+            switch (status) {
+                case "בטיפול":
+                    message =
+                        `שלום ${name} 👋
+            הזמנתך בטיפול ✅
+            
+            🧾 מספר הזמנה: ${order.id}
+            
+            📍 כתובת למשלוח:
+            ${address}
+            
+            🛒 פרטי הזמנה:
+            ${productsList}
+            
+            💵 סה"כ לתשלום: ${totalPrice} ₪
+            
+            נעדכן אותך ברגע שההזמנה תצא אליך! 🍫🛵`;
+                    break;
 
-📍 כתובת למשלוח:
-${address}
+                case "יצא למשלוח":
+                    message =
+                        `שלום ${name} 👋
+            הזמנתך עודכנה לסטטוס: *${status}*
+            
+            🧾 מספר הזמנה: ${order.id}
+            
+            📍 כתובת למשלוח:
+            ${address}
+            
+            🛒 פרטי הזמנה:
+            ${productsList}
+            
+            💵 סה"כ לתשלום: ${totalPrice} ₪
+            
+            ⏱️ זמן אספקה משוער: עד 30 דקות 🛵💨
+            
+            🛵 שוקו דרינק - משלוח מהיר של אלכוהול, חטיפים, סיגריות ועוד! 🚀`;
+                    break;
 
-🛒 פרטי הזמנה:
-${productsList}
+                case "סופק":
+                    message =
+                        `שלום ${name} 👋
+            שמחים לעדכן כי ההזמנה שלך סופקה בהצלחה! 🎉
+            
+            🧾 מספר הזמנה: ${order.id}
+            
+            תודה שהזמנת משוקו דרינק 🍫🚀
+            נשמח לראותך שוב! 🙌`;
+                    break;
 
-💵 סה"כ לתשלום: ${totalPrice} ₪
+                case "בוטל":
+                    message =
+                        `שלום ${name} 👋
+            הזמנתך בוטלה בהתאם לבקשתך או עקב בעיה.
+            
+            🧾 מספר הזמנה: ${order.id}
+            
+            לפרטים נוספים ניתן ליצור קשר.`;
+                    break;
+            }
 
- זמן אספקה משוער: עד 30 דקות 🛵💨
 
-🛵 שוקו דרינק - משלוח מהיר של אלכוהול, חטיפים, סיגריות ועוד! 🚀`;
 
             const encodedMessage = encodeURIComponent(message);
             const whatsappURL = `https://wa.me/${phone}?text=${encodedMessage}`;
@@ -288,3 +335,7 @@ ${productsList}
         }
     }
 });
+
+
+
+
