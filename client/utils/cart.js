@@ -164,19 +164,35 @@ export function displayCart() {
 
 // Checkout then Go To Delivery info
 function checkout() {
+    let products = getProducts();
     let cart = getCart();
+
     if (cart.length === 0) {
         showPopup("עגלת קניות ריקה.");
         return;
     }
 
     let userId = getLoggedInUser()?.phoneNumber || null;
-    console.log(getLoggedInUser());
     if (!userId) {
         showPopup("בצע כניסה כדי לבצע הזמנה!");
         return;
     }
 
+    // בדיקת מלאי
+    for (let item of cart) {
+        let product = products.find(p => p.id === item.productId);
+        if (!product) {
+            showPopup(`מוצר בשם ${item.name} לא נמצא.`);
+            
+            return; // עצור, לא להמשיך
+        }
+        if (product.stock < item.quantity) {
+            showPopup(`המוצר "${product.name}" לא קיים בכמות המבוקשת במלאי.`);
+            return; // עצור, לא להמשיך
+        }
+    }
+
+    // אם הכל תקין - להמשיך
 
     // Convert cart items into OrderProduct objects
     let orderProducts = cart.map(item => new OrderProduct(item.productId, item.quantity));
@@ -184,17 +200,14 @@ function checkout() {
     // Calculate total price
     let totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    // Create Order object, set address empty string
+    // Create Order object
     const order = new Order({ totalPrice, address: "", products: orderProducts });
 
-    // Store order and orderProducts temporarily in sessionStorage
+    // Store order temporarily
     localStorage.setItem("pendingOrder", JSON.stringify(order));
 
-
-    // Redirect to delivery page
+    // Redirect
     window.location.href = `delivery.html`;
-
 }
-
 
 

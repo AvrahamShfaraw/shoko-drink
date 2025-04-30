@@ -18,5 +18,5 @@ export function showPopup(message) {
 
     setTimeout(() => {
         popup.remove();
-    }, 1000); // disappear after 2 seconds
+    }, 2000); // disappear after 2 seconds
 }
