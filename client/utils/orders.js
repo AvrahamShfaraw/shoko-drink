@@ -223,23 +223,6 @@ export async function displayOrderDetails() {
 }
 
 
-// document.addEventListener("change", async (e) => {
-//     if (e.target.classList.contains("status-dropdown")) {
-//         const id = e.target.dataset.orderId;
-//         const status = e.target.value;
-
-//         try {
-
-//             await updateStatus({ id, status });
-//             await displayOrderDetails();
-
-//         } catch (err) {
-//             showPopup("שגיאה בעדכון הסטטוס ❌");
-//             console.error(err);
-//         }
-//     }
-// });
-
 
 document.addEventListener("change", async (e) => {
     if (e.target.classList.contains("status-dropdown")) {
@@ -259,7 +242,7 @@ document.addEventListener("change", async (e) => {
             const productsList = order.products.map(p => `• ${p.product.name} x${p.quantity}`).join('\n');
 
             const totalPrice = order.products.reduce((sum, p) => sum + (p.product.price * p.quantity), 0);
-
+            const orderLink = `https://avrahamshfaraw.github.io/shoko-drink/client/pages/orderDetails.html?orderId=${order.id}`;
             let message;
 
             switch (status) {
@@ -268,7 +251,8 @@ document.addEventListener("change", async (e) => {
                         `שלום ${name} 👋
             הזמנתך בטיפול ✅
             
-            🧾 מספר הזמנה: ${order.id}
+           🔗 צפייה בפרטי ההזמנה: ${orderLink}
+
             
             📍 כתובת למשלוח:
             ${address}
@@ -286,7 +270,8 @@ document.addEventListener("change", async (e) => {
                         `שלום ${name} 👋
             הזמנתך עודכנה לסטטוס: *${status}*
             
-            🧾 מספר הזמנה: ${order.id}
+           🔗 צפייה בפרטי ההזמנה: ${orderLink}
+
             
             📍 כתובת למשלוח:
             ${address}
@@ -306,7 +291,8 @@ document.addEventListener("change", async (e) => {
                         `שלום ${name} 👋
             שמחים לעדכן כי ההזמנה שלך סופקה בהצלחה! 🎉
             
-            🧾 מספר הזמנה: ${order.id}
+           🔗 צפייה בפרטי ההזמנה: ${orderLink}
+
             
             תודה שהזמנת משוקו דרינק 🍫🚀
             נשמח לראותך שוב! 🙌`;
@@ -317,7 +303,8 @@ document.addEventListener("change", async (e) => {
                         `שלום ${name} 👋
             הזמנתך בוטלה בהתאם לבקשתך או עקב בעיה.
             
-            🧾 מספר הזמנה: ${order.id}
+           🔗 צפייה בפרטי ההזמנה: ${orderLink}
+
             
             לפרטים נוספים ניתן ליצור קשר.`;
                     break;
