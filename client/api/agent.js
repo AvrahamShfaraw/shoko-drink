@@ -2,8 +2,8 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.6.0/+esm";
 import { store } from "../stores/store.js";
 
 
-
-axios.defaults.baseURL = 'https://shoko-drink-babcg9dmabfrdphw.israelcentral-01.azurewebsites.net/api/';
+// https://shoko-drink-babcg9dmabfrdphw.israelcentral-01.azurewebsites.net/api/
+axios.defaults.baseURL = 'http://localhost:5000/api/';
 
 export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

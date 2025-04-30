@@ -24,25 +24,28 @@
 
         </div>
         <h2>רוצה להירשם</h2>
-        <form id="register-form-step-1">
+        <!-- <form id="register-form-step-1">
             <input type="tel" id="phoneNumber" placeholder="מספר טלפון" required>
-            <small id="phone-error"></small> <!-- Error message will appear here -->
-
+            <small id="phone-error"></small> 
             <button type="submit" id="next-step">המשך</button>
-        </form>
-        <form id="register-form-step-2" style="display: none;">
+            
+        </form> -->
+        <form id="register-form" >
 
 
             <!-- Hidden input to store the phone number -->
-            <input type="hidden" id="phone-hidden" name="phone">
+            <!-- <input type="hidden" id="phone-hidden" name="phone"> -->
 
-            <input type="email" id="email" placeholder='כתובת דוא"ל' required>
+            <!-- <input type="email" id="email" placeholder='כתובת דוא"ל' required> -->
 
             <input type="displayName" id="displayName" placeholder="שם מלא" required>
             
+            <input type="tel" id="phoneNumber" placeholder="מספר טלפון" required>
+            <small id="phone-error"></small> 
+
             <small id="error-text"></small> <!-- Error message will appear here -->
 
-            
+
             <button type="submit" id="submit-btn" class="action-btn">יצירת חשבון</button>
 
 

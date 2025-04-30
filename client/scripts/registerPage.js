@@ -9,36 +9,36 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-document.getElementById('register-form-step-1').addEventListener('submit', (e) => {
-    e.preventDefault();
+// document.getElementById('register-form-step-1').addEventListener('submit', (e) => {
+//     e.preventDefault();
 
-    const phoneInput = document.getElementById('phoneNumber');
-    const phoneNumber = phoneInput.value.trim();
-    const phoneError = document.getElementById('phone-error'); // Error message element
+//     const phoneInput = document.getElementById('phoneNumber');
+//     const phoneNumber = phoneInput.value.trim();
+//     const phoneError = document.getElementById('phone-error'); // Error message element
 
-    // Improved phone number validation for Israeli numbers
-    const phoneRegex = /^05\d{8}$/; // Ensures it starts with 05 and is exactly 10 digits
+//     // Improved phone number validation for Israeli numbers
+//     const phoneRegex = /^05\d{8}$/; // Ensures it starts with 05 and is exactly 10 digits
 
-    if (phoneRegex.test(phoneNumber)) {
-        document.getElementById('register-form-step-1').style.display = 'none';
-        document.getElementById('register-form-step-2').style.display = 'flex';
-        document.getElementById('google-signin-container').style.display = 'flex';
+//     if (phoneRegex.test(phoneNumber)) {
+//         document.getElementById('register-form-step-1').style.display = 'none';
+//         document.getElementById('register-form-step-2').style.display = 'flex';
+//         document.getElementById('google-signin-container').style.display = 'flex';
 
-        // Store phone number in the hidden input field
-        document.getElementById('phone-hidden').value = phoneNumber;
-        phoneError.textContent = ''; // Clear any previous errors
-    } else {
-        phoneError.textContent = 'נא להזין מספר טלפון תקין, 10 ספרות בפורמט 05 XXXXXXXX';
-        phoneError.style.color = 'red';
-        phoneError.style.textAlign = 'center';
-        phoneError.style.padding = '10px'
-
-
-    }
-});
+//         // Store phone number in the hidden input field
+//         document.getElementById('phone-hidden').value = phoneNumber;
+//         phoneError.textContent = ''; // Clear any previous errors
+//     } else {
+//         phoneError.textContent = 'נא להזין מספר טלפון תקין, 10 ספרות בפורמט 05 XXXXXXXX';
+//         phoneError.style.color = 'red';
+//         phoneError.style.textAlign = 'center';
+//         phoneError.style.padding = '10px'
 
 
-document.getElementById("register-form-step-2").addEventListener("submit", async (e) => {
+//     }
+// });
+
+
+document.getElementById("register-form").addEventListener("submit", async (e) => {
 
     await registerUser(e);
 });

@@ -21,9 +21,11 @@ namespace Api.Controllers
         private readonly DataContext _context;
         private readonly TokenService _tokenService;
         private readonly ILogger<AccountController> _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountController(DataContext context, TokenService tokenService, ILogger<AccountController> logger)
+        public AccountController(DataContext context, TokenService tokenService, ILogger<AccountController> logger, IHttpContextAccessor httpContextAccessor)
         {
+            _httpContextAccessor = httpContextAccessor;
             _logger = logger;
             _context = context;
             _tokenService = tokenService;
@@ -147,17 +149,19 @@ namespace Api.Controllers
         [HttpPost("update")]
         public async Task<ActionResult<UserDto>> Update(RegisterDto updateDto)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == updateDto.PhoneNumber);
+
+            var currentUserPhoneNumber = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.MobilePhone);
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == currentUserPhoneNumber);
 
             if (user == null)
             {
-                return BadRequest("מספר הטלפון לא קיים.");
+                return BadRequest("משתמש לא קיים.");
             }
 
             user.Email = updateDto.Email;
             user.DisplayName = updateDto.DisplayName;
-
-            
+            user.PhoneNumber = updateDto.PhoneNumber; // עדכון הטלפון
 
             _context.Entry(user).State = EntityState.Modified;
 
@@ -168,17 +172,8 @@ namespace Api.Controllers
                 return BadRequest("משהו לא בסדר בעדכון הפרטים");
             }
 
-            var updatedUser = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == updateDto.PhoneNumber);
-
-            if (updatedUser == null)
-            {
-                return BadRequest("המשתמש לא נמצא לאחר העדכון.");
-            }
-
-            return CreateUserObject(updatedUser);
+            return CreateUserObject(user);
         }
-
-
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {

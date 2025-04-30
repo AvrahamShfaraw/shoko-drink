@@ -1,5 +1,6 @@
 import { UpdateUser } from "../models/user.js";
 import { store } from "../stores/store.js";
+import { showPopup } from "../utils/global.js";
 import { loadHeader } from "../utils/navbar.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -12,7 +13,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     // Fields to update
-    const fields = ["email", "displayName", "phoneNumber"];
+    //"email", 
+    const fields = ["displayName", "phoneNumber"];
     // update usernameSpan avtar navbar
     const usernameSpan = document.getElementById("username-span");
 
@@ -48,8 +50,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         submitButton.disabled = true;
         submitButton.innerHTML = '<span class="spinner-button"></span>';
 
+        const email = "customer1@example.com";
+
         const updatedUser = new UpdateUser(
-            document.getElementById("email").value,
+            // document.getElementById("email").value,
+            email,
             document.getElementById("displayName").value,
             document.getElementById("phoneNumber").value,
 
@@ -71,6 +76,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             submitButton.disabled = false;
             submitButton.innerHTML = 'עדכון פרטים'; // Reset button text
+
+            showPopup("הפרטים עודכנו בהצלחה!");
 
 
         } catch (error) {

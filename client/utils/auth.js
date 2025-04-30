@@ -71,12 +71,33 @@ export async function registerUser(event) {
 
     event.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
+    //document.getElementById("email").value.trim() 
+    const email = "customer1@example.com";
     const displayName = document.getElementById("displayName").value.trim();
-    const phoneNumber = document.getElementById('phone-hidden').value.trim();
+
+    const phoneInput = document.getElementById('phoneNumber');
+
+    const phoneNumber = phoneInput.value.trim();
+    const phoneError = document.getElementById('phone-error'); // Error message element
 
     const submitButton = document.getElementById('submit-btn');;
     const errorText = document.getElementById('error-text'); // Error message element
+
+
+    // Improved phone number validation for Israeli numbers
+    const phoneRegex = /^05\d{8}$/; // Ensures it starts with 05 and is exactly 10 digits
+
+    if (phoneRegex.test(phoneNumber)) {
+
+        phoneError.textContent = ''; // Clear errors
+    } else {
+        phoneError.textContent = 'נא להזין מספר טלפון תקין, 10 ספרות בפורמט 05 XXXXXXXX';
+        phoneError.style.color = 'red';
+        phoneError.style.textAlign = 'center';
+        phoneError.style.padding = '10px'
+
+
+    }
 
     // Clear previous error message
     errorText.textContent = '';
