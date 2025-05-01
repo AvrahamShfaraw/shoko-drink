@@ -50,7 +50,7 @@ body {
     color: white;
     padding: 12px 24px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     font-size: 16px;
     font-family: 'Arial', sans-serif;
@@ -61,7 +61,7 @@ main {
     display: none;
     max-width: 1440px;
     margin: 0 auto;
-    margin-top:70px;
+    margin-top: 70px;
 }
 
 h2 {
@@ -417,13 +417,14 @@ form>label {
     cursor: pointer;
     transition: all 0.3s ease;
 }
+
 .category-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ccc;
     padding: 8px 0;
-    
+
 }
 
 /* Hover effect */
@@ -525,7 +526,7 @@ form>label {
     flex-direction: column;
     gap: 20px;
 
-    max-height: 604px;
+    height: 65vh;
     /* or any height you prefer */
     overflow-y: auto;
     scrollbar-width: thin;
@@ -1033,18 +1034,27 @@ form>label {
 }
 
 .delete-order-btn {
-    font-size: 16px; /* small text */
-    padding: 2px 6px; /* tiny padding */
-    background-color: transparent; /* or inherit global button background */
-    color: red; /* optional: make it red to show it's delete */
-    border: none; /* no border, clean look */
+    font-size: 16px;
+    /* small text */
+    padding: 2px 6px;
+    /* tiny padding */
+    background-color: transparent;
+    /* or inherit global button background */
+    color: red;
+    /* optional: make it red to show it's delete */
+    border: none;
+    /* no border, clean look */
     cursor: pointer;
-    margin-top: 8px; /* some spacing if needed */
-    align-self: flex-end; /* if inside flexbox, can align to end */
+    margin-top: 8px;
+    /* some spacing if needed */
+    align-self: flex-end;
+    /* if inside flexbox, can align to end */
 }
-.delete-order-btn:hover{
+
+.delete-order-btn:hover {
     background: none;
-    border: none; /* no border, clean look */
+    border: none;
+    /* no border, clean look */
 
 }
 
@@ -1143,18 +1153,14 @@ form>label {
         height: 48px;
     }
 
-
     .nav-link {
         font-size: 24px;
 
     }
 
-
-
     .modal-content {
         padding: 0 5px;
     }
-
 
     .hero-image-container>.hero-image {
         width: 200px;
@@ -1194,16 +1200,12 @@ form>label {
         padding: 10px;
     }
 
-
-
-
     .product-container {
         grid-template-columns: 1fr 1fr;
         gap: 10px;
 
         /* Single column for very small screens */
     }
-
 
     .product-image {
         width: 100px;
@@ -1254,11 +1256,37 @@ form>label {
         width: 100%;
     }
 
+    .cart-items {
+        height: 60vh;
+
+    }
+
     .popup-alert {
-        
-        
+
+
         padding: 10px 20px;
         font-size: 14px;
         max-width: 95%;
     }
+}
+
+
+
+@media (max-width: 400px) {
+
+
+    .cart-items {
+        height: 55vh;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+
+    .cart-items {
+        height: 50vh;
+    }
+
 }
