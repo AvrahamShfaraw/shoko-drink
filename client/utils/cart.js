@@ -65,36 +65,30 @@ export function addToCart(productId, categoryId) {
 // Remove item from cart
 export function removeFromCart(productId) {
     let cart = getCart();
-
     let products = getProducts();
     let product = products.find(p => p.id === productId);
 
-    if (!product) {
+    // Find the item in the cart with the given productId
+    const cartItem = cart.find(p => p.productId === productId);
 
+    if (cartItem) {
+        // Increase the product stock by the quantity in the cart
+        if (product) {
+            product.stock += cartItem.quantity;
+        }
+
+        // Remove the item from the cart
         cart = cart.filter(p => p.productId !== productId);
-        localStorage.setItem("cart", JSON.stringify(cart));
-        displayCart();
-        updateCartCount();
-        showPopup("המוצר הוסר מהעגלה!");
-        displayProducts();
-    } else {
-        cart = cart.filter(p => p.productId !== productId);
 
-        // Update the product stock in the products array
-        product.stock += 1;
-
+        // Save updated data
         localStorage.setItem("cart", JSON.stringify(cart));
-        displayCart();
-        updateCartCount();
-        showPopup("המוצר הוסר מהעגלה!");
-        displayProducts();
+        localStorage.setItem("products", JSON.stringify(products)); // Make sure to update products if stored
     }
 
-
-
-
-
-
+    displayCart();
+    updateCartCount();
+    showPopup("המוצר הוסר מהעגלה!");
+    displayProducts();
 }
 
 export function updateCartCount() {
