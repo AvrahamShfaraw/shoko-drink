@@ -57,12 +57,11 @@ export function displayOrders() {
 
         const orderHTML = `
             <div class="order">
-                ${
-                    role === 0 ? `<button class="delete-order-btn" data-id="${order.id}">
+                ${role === 0 ? `<button class="delete-order-btn" data-id="${order.id}">
                 <span id="action-icon">&times;</span>
                 <span class="spinner-delete-button" style="display: none; "></span>
-                </button>`:''
-                }
+                </button>`: ''
+            }
                 
                 <div style="margin-bottom: 8px;">
                     <a href="https://avrahamshfaraw.github.io/shoko-drink/client/pages/orderDetails.html?orderId=${order.id}" style="color: black; display: flex; justify-content: space-between; align-items: center;">
@@ -243,92 +242,90 @@ document.addEventListener("change", async (e) => {
         const id = e.target.dataset.orderId;
         const status = e.target.value;
 
+        // Immediately create a temporary <a> and trigger click
+        const tempLink = document.createElement("a");
+        tempLink.style.display = "none";
+
         try {
             await updateStatus({ id, status });
             await displayOrderDetails();
 
             const order = getOrder(id);
-
-            const phone = order.customer.phoneNumber.replace(/^0/, '972'); // מחליף 0 בתחילת המספר
+            const phone = order.customer.phoneNumber.replace(/^0/, '972');
             const name = order.customer.displayName;
             const address = order.address;
 
             const productsList = order.products.map(p => `• ${p.product.name} x${p.quantity}`).join('\n');
-
             const totalPrice = order.products.reduce((sum, p) => sum + (p.product.price * p.quantity), 0);
             const orderLink = `https://avrahamshfaraw.github.io/shoko-drink/client/pages/orderDetails.html?orderId=${order.id}`;
             let message;
 
             switch (status) {
                 case "בטיפול":
-                    message =
-                        `שלום ${name} 👋
-            הזמנתך בטיפול ✅
-            
-           🔗 צפייה בפרטי ההזמנה: ${orderLink}
+                    message = `שלום ${name} 👋
+הזמנתך בטיפול ✅
 
-            
-            📍 כתובת למשלוח:
-            ${address}
-            
-            🛒 פרטי הזמנה:
-            ${productsList}
-            
-            💵 סה"כ לתשלום: ${totalPrice} ₪
-            
-            נעדכן אותך ברגע שההזמנה תצא אליך! 🍫🛵`;
+🔗 צפייה בפרטי ההזמנה: ${orderLink}
+
+📍 כתובת למשלוח:
+${address}
+
+🛒 פרטי הזמנה:
+${productsList}
+
+💵 סה"כ לתשלום: ${totalPrice} ₪
+
+נעדכן אותך ברגע שההזמנה תצא אליך! 🍫🛵`;
                     break;
 
                 case "יצא למשלוח":
-                    message =
-                        `שלום ${name} 👋
-            הזמנתך עודכנה לסטטוס: *${status}*
-            
-           🔗 צפייה בפרטי ההזמנה: ${orderLink}
+                    message = `שלום ${name} 👋
+הזמנתך עודכנה לסטטוס: *${status}*
 
-            
-            📍 כתובת למשלוח:
-            ${address}
-            
-            🛒 פרטי הזמנה:
-            ${productsList}
-            
-            💵 סה"כ לתשלום: ${totalPrice} ₪
-            
-            ⏱️ זמן אספקה משוער: עד 30 דקות 🛵💨
-            
-            🛵 שוקו דרינק - משלוח מהיר של אלכוהול, חטיפים, סיגריות ועוד! 🚀`;
+🔗 צפייה בפרטי ההזמנה: ${orderLink}
+
+📍 כתובת למשלוח:
+${address}
+
+🛒 פרטי הזמנה:
+${productsList}
+
+💵 סה"כ לתשלום: ${totalPrice} ₪
+
+⏱️ זמן אספקה משוער: עד 30 דקות 🛵💨
+
+🛵 שוקו דרינק - משלוח מהיר של אלכוהול, חטיפים, סיגריות ועוד! 🚀`;
                     break;
 
                 case "סופק":
-                    message =
-                        `שלום ${name} 👋
-            שמחים לעדכן כי ההזמנה שלך סופקה בהצלחה! 🎉
-            
-           🔗 צפייה בפרטי ההזמנה: ${orderLink}
+                    message = `שלום ${name} 👋
+שמחים לעדכן כי ההזמנה שלך סופקה בהצלחה! 🎉
 
-            
-            תודה שהזמנת משוקו דרינק 🍫🚀
-            נשמח לראותך שוב! 🙌`;
+🔗 צפייה בפרטי ההזמנה: ${orderLink}
+
+תודה שהזמנת משוקו דרינק 🍫🚀
+נשמח לראותך שוב! 🙌`;
                     break;
 
                 case "בוטל":
-                    message =
-                        `שלום ${name} 👋
-            הזמנתך בוטלה בהתאם לבקשתך או עקב בעיה.
-            
-           🔗 צפייה בפרטי ההזמנה: ${orderLink}
+                    message = `שלום ${name} 👋
+הזמנתך בוטלה בהתאם לבקשתך או עקב בעיה.
 
-            
-            לפרטים נוספים ניתן ליצור קשר.`;
+🔗 צפייה בפרטי ההזמנה: ${orderLink}
+
+לפרטים נוספים ניתן ליצור קשר.`;
                     break;
             }
 
-
-
             const encodedMessage = encodeURIComponent(message);
             const whatsappURL = `https://wa.me/${phone}?text=${encodedMessage}`;
-            window.open(whatsappURL, "_blank");
+
+            // Set href and target, then click
+            tempLink.href = whatsappURL;
+            tempLink.target = "_blank";
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            tempLink.remove();
 
         } catch (err) {
             showPopup("שגיאה בעדכון הסטטוס ❌");
@@ -336,7 +333,5 @@ document.addEventListener("change", async (e) => {
         }
     }
 });
-
-
 
 
